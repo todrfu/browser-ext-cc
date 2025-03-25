@@ -1,0 +1,12 @@
+{
+  "name": "browser-extension-cc",
+  "version": "0.0.1",
+  "description": "使用自定义规则，快速导航到指定页面",
+  "author": "drfu",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "crx": "^5.0.1"
+  }
+}

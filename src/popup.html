@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>曹操-规则配置</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 400px;
+      min-height: 300px;
+      background-color: #f7f7f7;
+    }
+
+    header {
+      background-color: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .container {
+      padding: 0 16px 16px;
+    }
+
+    .status-message {
+      margin-bottom: 12px;
+    }
+
+    .card {
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox input {
+      margin-right: 8px;
+    }
+
+    button {
+      padding: 4px 12px;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4338ca;
+    }
+
+    .btn-danger {
+      background-color: #ef4444;
+    }
+
+    .btn-danger:hover {
+      background-color: #dc2626;
+    }
+
+    .rules-container {
+      margin-bottom: 16px;
+    }
+
+    .rule-item {
+      border-radius: 8px;
+      background-color: #fff;
+      margin-bottom: 16px;
+      padding: 16px;
+    }
+
+    .new-rule-card {
+      padding: 16px;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .update-rule-button-group {
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+
+    .button-group__new-rule {
+      margin-bottom: 12px;
+    }
+
+    .status {
+      margin-top: 8px;
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+
+    .status-success {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+
+    .status-error {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+
+    .small-text {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .mb-4 {
+      margin-bottom: 16px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>曹操-规则配置</h1>
+  </header>
+
+  <div class="container">
+    <div id="status-message" class="status-message"></div>
+
+    <div class="card">
+      <h2>规则列表</h2>
+      <p class="small-text mb-4">配置快捷跳转规则，支持任意可访问链接</p>
+
+      <div id="rules-container" class="rules-container">
+        <!-- 规则会动态加载到这里 -->
+        <div class="text-center" id="loading-message">规则加载中...</div>
+      </div>
+    </div>
+
+    <div class="button-group button-group__new-rule">
+      <button id="add-rule-button">添加新规则</button>
+    </div>
+
+    <div id="new-rule-form" class="new-rule-card hidden">
+      <h2>添加新规则</h2>
+
+      <div class="form-group">
+        <label for="new-keyword">目标</label>
+        <input type="text" id="new-keyword" placeholder="例如: github">
+      </div>
+
+      <div class="form-group">
+        <label for="new-template">URL模板</label>
+        <input type="text" id="new-template" placeholder="例如: https://github.com/{source}">
+      </div>
+
+      <div class="form-group checkbox">
+        <input type="checkbox" id="new-enabled" checked>
+        <label for="new-enabled">启用</label>
+      </div>
+
+      <div class="button-group">
+        <button id="cancel-new-button">取消</button>
+        <button id="save-new-button">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
