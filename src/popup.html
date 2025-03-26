@@ -18,8 +18,10 @@
     header {
       background-color: #fff;
       border-bottom: 1px solid #e5e5e5;
-      padding: 16px;
-      margin-bottom: 20px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     h1 {
@@ -112,9 +114,10 @@
     }
 
     .new-rule-card {
-      padding: 16px;
+      padding: 0 16px 16px;
       border-radius: 8px;
       background-color: #fff;
+      margin-bottom: 12px;
     }
 
     .button-group {
@@ -126,10 +129,6 @@
     .update-rule-button-group {
       border-bottom: 1px solid #e5e5e5;
       padding-bottom: 12px;
-      margin-bottom: 12px;
-    }
-
-    .button-group__new-rule {
       margin-bottom: 12px;
     }
 
@@ -168,31 +167,28 @@
 <body>
   <header>
     <h1>曹操-规则配置</h1>
+    <div class="button-group button-group__new-rule">
+      <button id="add-rule-button">添加新规则</button>
+    </div>
   </header>
 
   <div class="container">
     <div id="status-message" class="status-message"></div>
 
-    <div class="card">
-      <h2>规则列表</h2>
-      <p class="small-text mb-4">配置快捷跳转规则，支持任意可访问链接</p>
-
-      <div id="rules-container" class="rules-container">
-        <!-- 规则会动态加载到这里 -->
-        <div class="text-center" id="loading-message">规则加载中...</div>
-      </div>
-    </div>
-
-    <div class="button-group button-group__new-rule">
-      <button id="add-rule-button">添加新规则</button>
-    </div>
+    <h2>规则列表</h2>
+    <p class="small-text mb-4">配置快捷跳转规则，支持任意可访问链接，如：规则 + 空格 + 关键词，当设置默认规则时，直接输入关键词即可。</p>
 
     <div id="new-rule-form" class="new-rule-card hidden">
       <h2>添加新规则</h2>
 
       <div class="form-group">
-        <label for="new-keyword">目标</label>
+        <label for="new-keyword">规则名</label>
         <input type="text" id="new-keyword" placeholder="例如: github">
+      </div>
+
+      <div class="form-group">
+        <label for="new-description">描述</label>
+        <input type="text" id="new-description" placeholder="例如: GitHub 仓库搜索">
       </div>
 
       <div class="form-group">
@@ -213,6 +209,13 @@
       <div class="button-group">
         <button id="cancel-new-button">取消</button>
         <button id="save-new-button">保存</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div id="rules-container" class="rules-container">
+        <!-- 规则会动态加载到这里 -->
+        <div class="text-center" id="loading-message">规则加载中...</div>
       </div>
     </div>
   </div>

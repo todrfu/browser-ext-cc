@@ -10,6 +10,7 @@ let saveNewButton
 let cancelNewButton
 let loadingMessage
 let statusMessage
+let newDescriptionInput
 
 // 初始化DOM引用
 function initDomReferences() {
@@ -17,6 +18,7 @@ function initDomReferences() {
   addRuleButton = document.getElementById('add-rule-button')
   newRuleForm = document.getElementById('new-rule-form')
   newKeywordInput = document.getElementById('new-keyword')
+  newDescriptionInput = document.getElementById('new-description')
   newTemplateInput = document.getElementById('new-template')
   newEnabledCheckbox = document.getElementById('new-enabled')
   newDefaultCheckbox = document.getElementById('new-default')
@@ -49,8 +51,13 @@ function renderRules(rules, defaultRuleId) {
     ruleElement.className = 'rule-item'
     ruleElement.innerHTML = `
       <div class="form-group">
-        <label for="keyword-${rule.id}">目标</label>
+        <label for="keyword-${rule.id}">规则名</label>
         <input type="text" id="keyword-${rule.id}" value="${rule.target}">
+      </div>
+
+      <div class="form-group">
+        <label for="description-${rule.id}">描述</label>
+        <input type="text" id="description-${rule.id}" value="${rule.description}">
       </div>
       
       <div class="form-group">
@@ -120,11 +127,13 @@ function saveRule(event) {
   const ruleId = button.getAttribute('data-id')
 
   const keywordInput = document.getElementById(`keyword-${ruleId}`)
+  const descriptionInput = document.getElementById(`description-${ruleId}`)
   const templateInput = document.getElementById(`template-${ruleId}`)
   const enabledCheckbox = document.getElementById(`enabled-${ruleId}`)
   const defaultCheckbox = document.getElementById(`default-${ruleId}`)
 
   const target = keywordInput.value.trim()
+  const description = descriptionInput.value.trim()
   const template = templateInput.value.trim()
 
   if (!target || !template) {
@@ -142,6 +151,7 @@ function saveRule(event) {
         return {
           ...rule,
           target,
+          description: description || `${target} 快速搜索`, // 如果没有填写描述，使用默认描述
           template,
           enabled: enabledCheckbox.checked,
         }
@@ -219,6 +229,7 @@ function hideNewRuleForm() {
 // 保存新规则
 function saveNewRule() {
   const target = newKeywordInput.value.trim()
+  const description = newDescriptionInput.value.trim()
   const template = newTemplateInput.value.trim()
 
   if (!target || !template) {
@@ -234,6 +245,7 @@ function saveNewRule() {
     const newRule = {
       id: 'rule-' + Date.now(),
       target,
+      description: description || `${target} 快速搜索`, // 如果没有填写描述，使用默认描述
       template,
       enabled: newEnabledCheckbox.checked,
     }
@@ -255,6 +267,12 @@ function saveNewRule() {
       renderRules(updatedRules, defaultRuleId)
       // 隐藏新规则表单
       hideNewRuleForm()
+      // 清空表单
+      newKeywordInput.value = ''
+      newDescriptionInput.value = ''
+      newTemplateInput.value = ''
+      newEnabledCheckbox.checked = true
+      newDefaultCheckbox.checked = false
     })
   })
 }
