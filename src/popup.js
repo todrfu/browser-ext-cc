@@ -5,6 +5,7 @@ let newRuleForm
 let newKeywordInput
 let newTemplateInput
 let newEnabledCheckbox
+let newDefaultCheckbox
 let saveNewButton
 let cancelNewButton
 let loadingMessage
@@ -18,6 +19,7 @@ function initDomReferences() {
   newKeywordInput = document.getElementById('new-keyword')
   newTemplateInput = document.getElementById('new-template')
   newEnabledCheckbox = document.getElementById('new-enabled')
+  newDefaultCheckbox = document.getElementById('new-default')
   saveNewButton = document.getElementById('save-new-button')
   cancelNewButton = document.getElementById('cancel-new-button')
   loadingMessage = document.getElementById('loading-message')
@@ -206,6 +208,7 @@ function showNewRuleForm() {
   newKeywordInput.value = ''
   newTemplateInput.value = ''
   newEnabledCheckbox.checked = true
+  newDefaultCheckbox.checked = false
 }
 
 // 隐藏新规则表单
@@ -225,7 +228,7 @@ function saveNewRule() {
 
   chrome.storage.sync.get(['rules', 'defaultRuleId'], (result) => {
     const rules = result.rules || []
-    const defaultRuleId = result.defaultRuleId || ''
+    let defaultRuleId = result.defaultRuleId || ''
 
     // 创建新规则
     const newRule = {
@@ -237,9 +240,16 @@ function saveNewRule() {
 
     // 添加新规则
     const updatedRules = [...rules, newRule]
+    
+    // 处理默认规则设置
+    const updates = { rules: updatedRules }
+    if (newDefaultCheckbox.checked) {
+      updates.defaultRuleId = newRule.id
+      defaultRuleId = newRule.id
+    }
 
     // 保存更新后的规则
-    chrome.storage.sync.set({ rules: updatedRules }, () => {
+    chrome.storage.sync.set(updates, () => {
       showStatus('新规则已添加', 'success')
       // 重新渲染规则列表
       renderRules(updatedRules, defaultRuleId)
