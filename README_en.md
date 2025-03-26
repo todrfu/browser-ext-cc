@@ -15,7 +15,7 @@ This Chrome extension helps users quickly navigate to specific URLs with customi
 
 ### From CRX File
 
-1. [Download CRX file](https://github.com/todrfu/browser-ext-cc/actions/runs/14076500867)
+1. [Download CRX file](https://github.com/todrfu/browser-ext-cc/actions/runs/14084571246)
 2. Open Chrome Developer Tools and click the Extensions icon in the toolbar
 3. Click "Load unpacked extension" button
 4. Select the CRX file
