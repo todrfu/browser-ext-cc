@@ -15,7 +15,7 @@
 
 ### CRX 文件
 
-1. [下载 CRX 文件](https://github.com/todrfu/browser-ext-cc/actions/runs/14076247746)
+1. [下载 CRX 文件](https://github.com/todrfu/browser-ext-cc/actions/runs/14076500867)
 2. 打开 Chrome 开发者工具，点击工具栏中的扩展图标
 3. 点击"加载已解压的扩展"按钮
 4. 选择 CRX 文件
